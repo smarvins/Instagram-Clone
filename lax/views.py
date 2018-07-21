@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-'''The homepage is your timeline page on instagram''''
+''' The homepage is your timeline page on instagram '''
 def homepage(request):
     return HttpResponse('This will be the homepage')
 #####################################################################

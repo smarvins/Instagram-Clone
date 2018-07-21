@@ -1,0 +1,9 @@
+Django==1.11.14
+pytz==2018.5
+confusable-homoglyphs==3.1.1
+django-bootstrap3==10.0.1
+django-registration==2.4.1
+django-tinymce==2.7.0
+Pillow==5.2.0
+psycopg2==2.7.5
+python-decouple==3.1
