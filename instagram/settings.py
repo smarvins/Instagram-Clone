@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'instagram',
-        'USER': 'one',
-        'PASSWORD': '1234',       
+        'USER': 'instagram',
+        'PASSWORD': '1234',
     }
 }
 
