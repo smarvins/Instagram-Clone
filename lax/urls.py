@@ -5,7 +5,8 @@ from . import views
 
 urlpatterns=[
     url('^$',views.homepage,name ='home'),
-    url('^profile/(?P<username>[-_\w.]+)/$',views.profilepage,name ='profile'),
+    url(r'^profile/(?P<username>[-_\w.]+)/$',views.profilepage,name ='profile'),
+    url(r'^profile/(?P<username>[-_\w.]+)/edit/$', views.update_profile, name='edit'),
     url('^$',views.discoverpage,name ='discoverpage'),
     url('^$',views.searchpage,name ='searchpage'),
     url('^$',views.registerationpage,name ='registerationpage'),
