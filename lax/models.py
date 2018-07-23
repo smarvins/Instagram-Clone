@@ -12,4 +12,8 @@ class Profile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length= 70)
     # image = models.ImageField(upload_to = 'posts/')
-    posted_on = models.DateTimeField(auto_new_add= True)
+    posted_on = models.DateTimeField(auto_now_add= True)
+
+class Comment(models.Model):
+    comment = models.CharField(max_length= 70)
+    post_on = models.DateTimeField(auto_now_add= True)
