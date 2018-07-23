@@ -1,5 +1,5 @@
-from __future__ import unicode_literals
 from django.contrib.auth.decorators import login_required
+from __future__ import unicode_literals
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import UserForm,ProfileForm,PostForm
@@ -11,6 +11,8 @@ from django.db import transaction
 from django.core.urlresolvers import reverse
 from .models import Profile,Post,Comment,Like
 
+#####################################################################
+
 
 ''' The homepage is your timeline page on instagram '''
 
@@ -21,7 +23,11 @@ def homepage(request):
     posts = Post.objects.filter(profile_in= users_followed).order_by('-posted_on')
 
     return render(request,'index.html',{"posts":posts})
+
+
 #####################################################################
+
+
 '''This is your profile section where you'll be in control of your account'''
 @login_required
 def profilepage(request, username):
@@ -59,19 +65,25 @@ def update_profile(request, username):
 
 
 #####################################################################
+
+
 '''A section where you will be able to post images'''
 @login_required
 def posts(request):
     if request.method == 'POST':
         form = PostForm(request.POST,files= request.FILES)
         if form.is_valid():
-            post = Post(profile= request.user.profile, title= request.POST['image'])
+            post = Post(profile= request.user.profile, title= request.POST['title'], , image = request.FILES['image']))
             post.save()
-            return redirect('profile', kwargs={'username':request.user.username})
+            return redirect('profile', request.user)
     else:
         form = PostForm()
     return render(request, 'post_picture.html', {"form":form})
+
+
 #####################################################################
+
+
 '''A section where you will be able to *stalk* follow other people'''
 def followers(request, username):
   user = user = User.objects.get(username = username)
