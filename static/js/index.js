@@ -33,3 +33,37 @@ function like_update_view(data) {
   }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // update like count
+  var difference = data.result ? 1 : -1;
+  var $post = $('.view-update.' + data.post_pk);
+  var $likes = $post.find('.likes');
+  var likes = parseInt($likes.text());
+  likes = likes + difference;
+
+  console.log('likes', likes);
+
+  if (likes == null || isNaN(likes)) {
+    $likes.text('1 like');
+  } else if (likes === 0) {
+    $likes.text('');
+  } else if (likes === 1) {
+    $likes.text('1 like');
+  } else {
+    $likes.text(likes + ' likes');
+  }
+}
+
+
+$('.submit-like').on('click', function() {
+  create_like.call(this, like_update_view, error_cb);
+});
+
+$('.card__main-image').on('dblclick', function() {
+  var $unlikedHeart = $(this).closest('.view-update').find('.fa-heart-o');
+  if($unlikedHeart) {
+    $unlikedHeart.click();
+  }
+})
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
