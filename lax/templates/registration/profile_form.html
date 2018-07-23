@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% load static custom_tags %}
+
+{% block body_class_override %}white{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row profile-settings">
+    <div class="col-xs-12">
+      <div class="profile-pic-name">
+        {% if user.userprofile.profile_pic %}
+          <img class="picture-circle--medium" src="{{ user.userprofile.profile_pic.url }}">
+        {% else %}
+          <img class="picture-circle--medium" src="{% static 'images/profile_placeholder.jpg' %}">
+        {% endif %}
+        <span class="username">{{ user.username }}</span>
+      </div>
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ profile_form.profile_pic.label }}
+          {{ profile_form.profile_pic }}
+          {{ profile_form.profile_pic.errors }}
+        </div>
+        <div class="form-group">
+          {{ user_form.first_name.label }} <br>
+          {{ user_form.first_name }}
+          {{ user_form.first_name.errors }}
+        </div>
+        <div class="form-group">
+          {{ user_form.last_name.label }} <br>
+          {{ user_form.last_name }}
+          {{ user_form.last_name.errors }}
+        </div>
+        <div class="form-group">
+          {{ profile_form.email.label }} <br>
+          {{ profile_form.email }}
+          {{ profile_form.email.errors }}
+        </div>
+        <div class="form-group">
+          {{ profile_form.bio.label }} <br>
+          {{ profile_form.bio }}
+          {{ profile_form.bio.errors }}
+        </div>
+        <div class="form-group">
+          {{ profile_form.location.label }}<br>
+          {{ profile_form.location }}
+          {{ profile_form.location.errors }}
+        </div>
+        <div class="form-group">
+          {{ profile_form.birth_date.label }}<br>
+          {{ profile_form.birth_date }}
+          {{ profile_form.birth_date.errors }}
+        </div>
+        <div class="form-group">
+          {{ profile_form.phone_number.label }}<br>
+          {{ profile_form.phone_number }}
+          {{ profile_form.phone_number.errors }}
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
