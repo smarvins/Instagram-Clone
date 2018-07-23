@@ -220,3 +220,17 @@ def follow_toggle(request):
     }
 
 
+######################################################################
+
+
+'''Here's where you can see the function to search for a user'''
+def search(request):
+    if request.method == 'POST':
+        profile =  request.POST.getprofile('search')
+        try:
+            status = Add_prod.objects.filter(profile__icontains=profile)
+        except Add_prod.DoesNotExist:
+            status = None
+        return render(request,"search.html",{"books":status})
+    else:
+        return render(request,"search.html",{})
