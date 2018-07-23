@@ -47,4 +47,14 @@ def posts(request):
             return redirect('profile', kwargs={'username':request.user.username})
     else:
         form = PostForm()
-    return render(request, 'post_picture.html', {"form":form})            
+    return render(request, 'post_picture.html', {"form":form})
+#####################################################################
+'''A section where you will be able to *stalk* follow other people'''
+def followers(request, username):
+  user = user = User.objects.get(username = username)
+  user_profile = Profile.objects.get(user=user)
+  profiles = user_profile.followers.all
+
+  title = "Followers"
+
+  return render(request, 'follow_list.html', {"title": title, "profiles":profiles})
