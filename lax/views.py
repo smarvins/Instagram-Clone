@@ -94,3 +94,19 @@ def followers(request, username):
    title = "Followinng"
 
    return render(request, 'follow_list.html', {"title": title, "profiles":profiles})
+######################################################################
+
+
+'''Here's where you like an image that has been uploaded'''
+   def post(request, pk):
+    post = Post.objects.get(pk=pk)
+    try:
+        like = Like.objects.get(post=post, user=request.user)
+        liked = 1
+    except:
+        like = None
+        liked = 0
+
+    return render(request, 'post.html', {"post": post})
+
+
