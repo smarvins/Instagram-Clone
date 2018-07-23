@@ -35,7 +35,7 @@ class Profile(models.Model):
         if self.following.count():
             retturn self.following.count()
         else:
-            return 0
+            return 
     def __str__ (self):
         return self.user.username
 
@@ -67,4 +67,4 @@ class Like(models.Model):
         unique_together =("post","user")
 
     def __str__(self):
-        return 'Like:' + self.user.username + '' + self.post.title        
+        return 'Like:' + self.user.username + '' + self.post.title
