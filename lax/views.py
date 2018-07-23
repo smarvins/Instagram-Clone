@@ -36,3 +36,15 @@ def searchpage(request):
 def registerationpage(request):
     return HttpResponse('This shall be where you will sign in/up')
 #####################################################################
+'''A section where you will be able to post images'''
+@login_required
+def posts(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST,files= request.FILES)
+        if form.is_valid():
+            post = Post(profile= request.user.profile, title= request.POST['image'])
+            post.save()
+            return redirect('profile', kwargs={'username':request.user.username})
+    else:
+        form = PostForm()
+    return render(request, 'post_picture.html', {"form":form})            
