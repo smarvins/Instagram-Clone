@@ -31,6 +31,33 @@ def profilepage(request, username):
     profile = Profile.objects.get(user= user)
     title = "{user.username}"
     return render(request, 'profiles/profile.html', {"title":title,"user":user,"profile":profile})
+
+
+
+####################################################################################
+
+
+'''This is your profile section where you'll be able to update your profile '''
+@login_required
+@transaction.atomic
+def update_profile(request, username):
+  user = User.objects.get(username = username)
+  if request.method == 'POST':
+    user_form = UserForm(request.POST, instance = request.user)
+    profile_form = ProfileForm(request.POST, instance = request.user.profile,files =request.FILES)
+    if user_form.is_valid() and profile_form.is_valid():
+      user_form.save()
+      profile_form.save()
+      messages.success(request, ('Your profile was successfully updated!'))
+      return redirect(reverse('profile', kwargs={'username': request.user.username}))
+    else:
+      messages.error(request, ('Please correct the error below.'))
+  else:
+    user_form = UserForm(instance = request.user)
+    profile_form = ProfileForm(instance = request.user.profile)
+  return render(request, 'profiles/profile_form.html', {"user_form": user_form,"profile_form": profile_form})
+
+
 #####################################################################
 '''A section where you will be able to see other people's images the ones you don't follow'''
 def discoverpage(request):
