@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'lax',
     'bootstrap3',
     'imagekit',
+    'pilkit',
 ]
 
 MIDDLEWARE = [
