@@ -81,3 +81,16 @@ def followers(request, username):
   title = "Followers"
 
   return render(request, 'follow_list.html', {"title": title, "profiles":profiles})
+
+ #####################################################################
+
+
+ '''A section where your people will be able to 'stalk' or look at what youve been up to '''
+ def following(request, username):
+   user = user = User.objects.get(username = username)
+   user_profile = Profile.objects.get(user=user)
+   profiles = user_profile.following.all
+
+   title = "Followinng"
+
+   return render(request, 'follow_list.html', {"title": title, "profiles":profiles})
