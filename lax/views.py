@@ -59,18 +59,6 @@ def update_profile(request, username):
 
 
 #####################################################################
-'''A section where you will be able to see other people's images the ones you don't follow'''
-def discoverpage(request):
-    return HttpResponse('This shall be the discoverpage')
-#####################################################################
-'''A section where you can search for other users based on their profile name (nickname in short)'''
-def searchpage(request):
-    return HttpResponse('This shall be the searchpage')
-#####################################################################
-'''Another section where you'll be registered to enter the website '''
-def registerationpage(request):
-    return HttpResponse('This shall be where you will sign in/up')
-#####################################################################
 '''A section where you will be able to post images'''
 @login_required
 def posts(request):
