@@ -110,3 +110,18 @@ def followers(request, username):
     return render(request, 'post.html', {"post": post})
 
 
+######################################################################
+
+
+'''Here's where you can explore images and likes that has been posted'''
+def explore(request):
+  random_posts = Post.objects.all().order_by('?')[:40]
+  return render(request, 'discoverpage.html', {"posts":random_posts})
+
+def likes(request, pk):
+  post = Post.objects.get(pk=pk)
+  profiles = Like.objects.filter(post=post)
+
+  title = 'Likes'
+  return render(request, 'follow_list.html', {"title": title, "profiles":profiles})
+
