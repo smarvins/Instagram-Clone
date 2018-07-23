@@ -7,11 +7,11 @@ from django.dispatch import receiver
 from imagekit.models import  ProcessedImageField
 
 class Profile(models.Model):
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
     followers = models.ManyToManyField('Profile', related_name= 'followers_profile', blank= True)
     following = models.ManyToManyField('Profile', related_name= 'following_profile', blank= True)
     profile_pic = models.ImageField(upload_to= 'profile_pic/', null= True, blank= True)
-    biography = models.TextField(max_length = 50, blank= True)
+    bio = models.TextField(max_length = 50, blank= True)
     location = models.CharField(max_length= 30, blank= True)
     phone_number = models.IntegerField(blank= True, null= True)
     birth_date = models.DateField(null= True, blank= True)
@@ -41,7 +41,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length= 70)
-    profile = models.ForeignKey(User)
+    profile = models.ForeignKey(Profile, null= True, blank=True)
     imaage = models.ImageField(upload_to= 'posts/')
     posted_on = models.DateTimeField(auto_now_add= True)
 
@@ -51,8 +51,8 @@ class Post(models.Model):
         return self.comment_set.count()
 
 class Comment(models.Model):
-    user = models.ForeignKey(Profile)
-    post = models.ForeignKey(Post)
+    user = models.ForeignKey(User)
+    post = models.ForeignKey('Post')
     comment = models.CharField(max_length= 70)
     post_on = models.DateTimeField(auto_now_add= True)
 
@@ -60,7 +60,7 @@ class Comment(models.Model):
         return self.comment
 
 class Like(models.Model):
-    post = models.ForeignKey(Post)
+    post = models.ForeignKey('Post')
     user = models.ForeignKey(User)
 
     class Meta:
