@@ -1,0 +1,14 @@
+{% block content %}
+  {% for item in search_result %}
+    <div class='row'>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-12">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          {{item.profile_owner.username}}
+          <img src="{{item.profile_photo.url}}" class="img-responsive" alt="Image">
+          <br>{{item.profile_bio}}</br>
+          Followers
+          {{item.profile_follow.count}}
+        </div>
+      </div>
+    {% endfor %}
+  {% endblock %}
