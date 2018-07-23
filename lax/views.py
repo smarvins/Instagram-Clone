@@ -5,6 +5,7 @@ from django.http import HttpResponse
 
 
 ''' The homepage is your timeline page on instagram '''
+
 @login_required(login_url='accounts/login/')
 def homepage(request):
     # This will only bring users that you are Following
@@ -14,8 +15,14 @@ def homepage(request):
     return render(request,'index.html',{"posts":posts})
 #####################################################################
 '''This is your profile section where you'll be in control of your account'''
-def profilepage(request):
-    return HttpResponse('This shall be the profilepage')
+@login_required
+def profilepage(request, username):
+    user = User.objects.get(username= username)
+    if not user:
+        return redirect('Home')
+    profile = Profile.objects.get(user= user)
+    title = f"{user.username}"
+    return render(request, 'profiles/profile.html', {"title":title,"user":user,"profile":profile})
 #####################################################################
 '''A section where you will be able to see other people's images the ones you don't follow'''
 def discoverpage(request):
