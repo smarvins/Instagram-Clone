@@ -1,7 +1,15 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from .forms import UserForm,ProfileForm,PostForm
+from annoying.decorators import ajax_request
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.db import transaction
+from django.core.urlresolvers import reverse
+from .models import Profile,Post,Comment,Like
 
 
 ''' The homepage is your timeline page on instagram '''
@@ -21,7 +29,7 @@ def profilepage(request, username):
     if not user:
         return redirect('Home')
     profile = Profile.objects.get(user= user)
-    title = f"{user.username}"
+    title = "{user.username}"
     return render(request, 'profiles/profile.html', {"title":title,"user":user,"profile":profile})
 #####################################################################
 '''A section where you will be able to see other people's images the ones you don't follow'''

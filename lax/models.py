@@ -33,9 +33,9 @@ class Profile(models.Model):
 
     def get_number_of_following(self):
         if self.following.count():
-            retturn self.following.count()
+            return self.following.count()
         else:
-            return 
+            return
     def __str__ (self):
         return self.user.username
 
