@@ -42,7 +42,7 @@ class Profile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length= 70)
     profile = models.ForeignKey(Profile, null= True, blank=True)
-    imaage = models.ImageField(upload_to= 'posts/')
+    image = models.ImageField(upload_to= 'posts/')
     posted_on = models.DateTimeField(auto_now_add= True)
 
     def get_number_of_likes(self):

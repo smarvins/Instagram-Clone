@@ -1,5 +1,5 @@
-from django.contrib.auth.decorators import login_required
 from __future__ import unicode_literals
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import UserForm,ProfileForm,PostForm
@@ -73,9 +73,9 @@ def posts(request):
     if request.method == 'POST':
         form = PostForm(request.POST,files= request.FILES)
         if form.is_valid():
-            post = Post(profile= request.user.profile, title= request.POST['title'], , image = request.FILES['image']))
-            post.save()
-            return redirect('profile', request.user)
+          post = Post(profile = request.user.profile, title = request.POST['title'], image = request.FILES['image'])
+          post.save()
+        return redirect('profile', request.user)
     else:
         form = PostForm()
     return render(request, 'post_picture.html', {"form":form})
@@ -97,20 +97,21 @@ def followers(request, username):
  #####################################################################
 
 
- '''A section where your people will be able to 'stalk' or look at what youve been up to '''
- def following(request, username):
-   user = user = User.objects.get(username = username)
-   user_profile = Profile.objects.get(user=user)
-   profiles = user_profile.following.all
+ # '''A section where your people will be able to look at what youve been up to'''
+def following(request, username):
+  user = user = User.objects.get(username = username)
+  user_profile = Profile.objects.get(user=user)
+  profiles = user_profile.following.all()
 
-   title = "Followinng"
+  title = "Following"
 
-   return render(request, 'follow_list.html', {"title": title, "profiles":profiles})
+  return render(request, 'follow_list.html', {"title": title, "profiles":profiles})
+
 ######################################################################
 
 
-'''Here's where you like an image that has been uploaded'''
-   def post(request, pk):
+'''Here is where you like an image that has been uploaded'''
+def post(request, pk):
     post = Post.objects.get(pk=pk)
     try:
         like = Like.objects.get(post=post, user=request.user)
@@ -125,7 +126,7 @@ def followers(request, username):
 ######################################################################
 
 
-'''Here's where you can explore images and likes that has been posted'''
+'''Here is where you can explore images and likes that has been posted'''
 def explore(request):
   random_posts = Post.objects.all().order_by('?')[:40]
   return render(request, 'discoverpage.html', {"posts":random_posts})
@@ -140,7 +141,7 @@ def likes(request, pk):
 ######################################################################
 
 
-'''Here's where you can add a like to an image'''
+'''Here is where you can add a like to an image'''
 @ajax_request
 @login_required
 def add_like(request):
@@ -164,7 +165,7 @@ def add_like(request):
 ######################################################################
 
 
-'''Here's where you can comment!'''
+'''Here is where you can comment!'''
 @ajax_request
 @login_required
 def add_comment(request):
@@ -201,7 +202,7 @@ def add_comment(request):
 ######################################################################
 
 
-'''Here's where you can see the function to follow a user'''
+'''Here is where you can see the function to follow a user'''
 @ajax_request
 @login_required
 def follow_toggle(request):
@@ -235,7 +236,7 @@ def follow_toggle(request):
 ######################################################################
 
 
-'''Here's where you can see the function to search for a user'''
+'''Here is where you can see the function to search for a user'''
 def search(request):
     if request.method == 'POST':
         profile =  request.POST.getprofile('search')
