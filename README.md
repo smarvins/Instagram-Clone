@@ -24,7 +24,10 @@ In plain simple terms this is an Instagram-clone where you can create your own p
 * After that in the root folder inside your terminal type *pip3 python manage.py runserver*
 
 ## How to use it
-* Search on your terminal http://127.0.0.1:8000/accounts/register/ to sign in.
+* Search on your tab http://127.0.0.1:8000/accounts/register/ to sign in.
+* Or you want easy work? just use this dummy user as a way to experience the website
+     #Name:Adios
+     #Password: 35691782Steve
 * The nav bar shall direct you to what you can do click on the person icon to create your profile.
 * Go to the upload icon if you wanted to upload an image.
 * On the homepage click on an image if you want to see that user's profile.
