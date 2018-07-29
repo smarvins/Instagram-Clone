@@ -26,7 +26,7 @@ class Profile(models.Model):
         instance.profile.save()
 
     def get_number_of_followers(self):
-        if self.follwers.count():
+        if self.followers.count():
             return self.followers.count()
         else:
             return 0

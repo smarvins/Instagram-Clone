@@ -1,7 +1,7 @@
 import re
 from django import template
 from django.core.urlresolvers import reverse, NoReverseMatch
-from insta.models import Like
+from lax.models import Like
 
 register = template.Library()
 

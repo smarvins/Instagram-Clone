@@ -20,7 +20,7 @@ from .models import Profile,Post,Comment,Like
 def homepage(request):
     # This will only bring users that you are Following
     users_followed = request.user.profile.following.all()
-    posts = Post.objects.filter(profile_in= users_followed).order_by('-posted_on')
+    posts = Post.objects.filter(profile_id= users_followed).order_by('-posted_on')
 
     return render(request,'index.html',{"posts":posts})
 
@@ -120,7 +120,7 @@ def post(request, pk):
         like = None
         liked = 0
 
-    return render(request, 'post.html', {"post": post})
+    return render(request, 'post.html', {"post": post} )
 
 
 ######################################################################
@@ -129,7 +129,7 @@ def post(request, pk):
 '''Here is where you can explore images and likes that has been posted'''
 def explore(request):
   random_posts = Post.objects.all().order_by('?')[:40]
-  return render(request, 'discoverpage.html', {"posts":random_posts})
+  return render(request, 'explore.html', {"posts":random_posts})
 
 def likes(request, pk):
   post = Post.objects.get(pk=pk)
@@ -171,6 +171,7 @@ def add_like(request):
 def add_comment(request):
     comment_text = request.POST.get('comment_text')
     post_pk = request.POST.get('post_pk')
+
     post = Post.objects.get(pk=post_pk)
     commenter_info = {}
 
