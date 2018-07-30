@@ -3,7 +3,7 @@
 In plain simple terms this is an Instagram-clone where you can create your own profile,add images,like posts,follow,unfollow and be followed by other users.
 
 ## What works
-* Signing in amd loggin out.
+* Signing in amd logging out.
 * Add a profile.
 * Add an image.
 * Follow people.
