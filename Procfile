@@ -1,2 +1,2 @@
 
-web: gunicorn lax.wsgi
+web: gunicorn instagram.wsgi
